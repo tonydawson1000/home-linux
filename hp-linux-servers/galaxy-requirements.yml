@@ -1,0 +1,13 @@
+---
+# Install list of Ansible Galaxy Collections
+collections:
+
+# Install list of Ansible Galaxy Roles
+roles:
+  - name: linux-system-roles.cockpit
+    version: "1.5.8"
+
+  - name: linux-system-roles.rhc
+    version: "1.6.5"
+    
+...

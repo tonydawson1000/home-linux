@@ -1,0 +1,17 @@
+---
+
+- name: "Subscribe to Red Hat"
+  hosts: "{{ hostlist }}"
+  become: true
+
+  tasks:
+    - name: Ensure RHEL Subscription
+      include_role:
+        name: linux-system-roles.rhc
+      vars:
+        rhc_auth:
+          activation_keys:
+            keys: ["{{ activationkey }}"]
+        rhc_organization: "{{ orgid }}"
+
+...

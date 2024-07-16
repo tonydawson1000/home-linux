@@ -1,0 +1,12 @@
+---
+
+- name: "Enable Cockpit Service on RedHat System"
+  hosts: "{{ hostlist }}"
+  become: true
+
+  tasks:
+    - name: Ensure RHEL Web Console (Cockpit) is enabled
+      include_role:
+        name: linux-system-roles.cockpit
+
+...
