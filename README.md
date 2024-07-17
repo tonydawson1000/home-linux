@@ -47,6 +47,7 @@ You should get a 'Pong' in return...
 |---                                                                                                |---                                        |
 | [rhel-setup-enable-cockpit.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-cockpit.yml)       | Enable Cockpit (`http://<hostname>:9090`) |
 | [rhel-setup-subscribe.yml](/hp-linux-servers/rhel-setup/rhel-setup-subscribe.yml)                 | Subscribe to Red Hat                      |
+| [rhel-setup-update-packages.yml](/hp-linux-servers/rhel-setup/rhel-setup-update-packages.yml)     | Update ALL Packages                       |
 
 ## Run the Ansible Playbooks
 
@@ -54,4 +55,10 @@ You should get a 'Pong' in return...
 |---                    |---                                                                                                                                                        |
 | Enable Cockpit        | `ansible-playbook rhel-setup/rhel-setup-enable-cockpit.yml -e "hostlist=all" --ask-become-pass`                                                           |
 | Subscribe             | `ansible-playbook rhel-setup/rhel-setup-subscribe.yml -e "hostlist=all orgid=<enter-org-id> activationkey=<enter-activation-key>" --ask-become-pass`      |
+| Update ALL Packages   | `ansible-playbook rhel-setup/rhel-setup-update-packages.yml -e "hostlist=all" --ask-become-pass`                                                          |
 
+## Ansible AdHoc Commands
+
+| Command                                                           | Description                                                                           |
+|---                                                                |---                                                                                    |
+| `ansible -i hosts.ini all -b -a "/sbin/shutdown -r now" -K`       | Reboot the hosts  ** WARNING ** - This command Reboots the Hosts!! ** WARNING **      |

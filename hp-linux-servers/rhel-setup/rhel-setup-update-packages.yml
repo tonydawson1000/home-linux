@@ -1,0 +1,13 @@
+---
+
+- name: "Update and Upgrade ALL Packages"
+  hosts: "{{ hostlist }}"
+  become: yes
+
+  tasks:
+  - name: Ensure ALL Packages are up to date
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+
+...
