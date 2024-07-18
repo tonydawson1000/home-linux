@@ -45,13 +45,14 @@ You should get a 'Pong' in return...
 
 ## Ansible Playbooks
 
-| Ansible Playbook Name                                                                             | Description                               |
-|---                                                                                                |---                                        |
-| [rhel-setup-enable-cockpit.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-cockpit.yml)       | Enable Cockpit (`http://<hostname>:9090`) |
-| [rhel-setup-subscribe.yml](/hp-linux-servers/rhel-setup/rhel-setup-subscribe.yml)                 | Subscribe to Red Hat                      |
-| [rhel-setup-update-packages.yml](/hp-linux-servers/rhel-setup/rhel-setup-update-packages.yml)     | Update ALL Packages                       |
-| [rhel-setup-enable-epel.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-epel.yml)             | Install and Enable EPEL Repo              |
-| [rhel-setup-rdp.yml](/hp-linux-servers/rhel-setup/rhel-setup-rdp.yml)                             | Install xrdp and allow Firewall           |
+| Ansible Playbook Name                                                                                     | Description                               |
+|---                                                                                                        |---                                        |
+| [rhel-setup-enable-cockpit.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-cockpit.yml)               | Enable Cockpit (`http://<hostname>:9090`) |
+| [rhel-setup-subscribe.yml](/hp-linux-servers/rhel-setup/rhel-setup-subscribe.yml)                         | Subscribe to Red Hat                      |
+| [rhel-setup-update-packages.yml](/hp-linux-servers/rhel-setup/rhel-setup-update-packages.yml)             | Update ALL Packages                       |
+| [rhel-setup-enable-epel.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-epel.yml)                     | Install and Enable EPEL Repo              |
+| [rhel-setup-rdp.yml](/hp-linux-servers/rhel-setup/rhel-setup-rdp.yml)                                     | Install xrdp and allow Firewall           |
+| [rhel-setup-enable-virtualisation.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-virtualisation.yml) | Install Virtualisation tools / GUI        |
 
 
 ## Run the Ansible Playbooks
@@ -63,6 +64,7 @@ You should get a 'Pong' in return...
 | Update ALL Packages               | `ansible-playbook rhel-setup/rhel-setup-update-packages.yml -e "hostlist=all" --ask-become-pass`                                                          |
 | Install and Enable EPEL Repo      | `ansible-playbook rhel-setup/rhel-setup-enable-epel.yml -e "hostlist=all" --ask-become-pass`                                                              |
 | Install xrdp and allow Firewall   | `ansible-playbook rhel-setup/rhel-setup-rdp.yml -e "hostlist=all" --ask-become-pass`                                                                      |
+| Install Virtualisation tools / GUI| `ansible-playbook rhel-setup/rhel-setup-enable-virtualisation.yml -e "hostlist=all" --ask-become-pass`                                                    |
 
 
 ## Ansible AdHoc Commands
