@@ -1,0 +1,26 @@
+---
+
+- name: "Install xrdp and allow firewall"
+  hosts: "{{ hostlist }}"
+  become: true
+
+  tasks:
+    - name: Ensure XRDP is installed and enabled
+      ansible.builtin.dnf:
+        name: "xrdp"
+        state: latest
+
+    - name: Ensure the XRDP Service is enabled and started
+      ansible.builtin.systemd_service:
+        name: xrdp
+        enabled: true
+        state: started
+
+    - name: Ensure RDP Firewall is allowed
+      include_role:
+        name: linux-system-roles.firewall
+      vars:
+        firewall:
+          - { port: '3389/tcp', state: enabled, permanent: true }
+
+...

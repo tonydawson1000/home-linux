@@ -9,5 +9,8 @@ roles:
 
   - name: linux-system-roles.rhc
     version: "1.6.5"
-    
+
+  - name: linux-system-roles.firewall
+    version: "1.8.0"
+
 ...

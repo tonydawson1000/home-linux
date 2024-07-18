@@ -1,0 +1,27 @@
+--- 
+
+- name: "Install and enable EPEL Repo"
+  hosts: "{{ hostlist }}"
+  become: true
+
+  tasks:
+    - name: Ensure EPEL Repository is available
+      include_role:
+        name: linux-system-roles.rhc
+      vars:
+        rhc_repositories:
+          - {name: "rhel-9-for-x86_64-baseos-rpms", state: enabled}
+          - {name: "rhel-9-for-x86_64-appstream-rpms", state: enabled}
+          - {name: "codeready-builder-for-rhel-9-x86_64-rpms", state: enabled}
+
+    - name: Ensure the EPEL GPG key is imported
+      ansible.builtin.rpm_key:
+        key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+        state: present
+
+    - name: Ensure EPEL is installed and enabled
+      ansible.builtin.dnf:
+        name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
+        state: latest
+
+...

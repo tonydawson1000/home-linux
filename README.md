@@ -32,10 +32,12 @@ You should get a 'Pong' in return...
 
 ## View Ansible Galaxy Roles and Collections
 
-| Galaxy Role Name                  | View Info Command                                         |
-|---                                |---                                                        |
-| [`linux-system-roles.cockpit`](https://galaxy.ansible.com/ui/standalone/roles/linux-system-roles/cockpit/)      | `ansible-galaxy role info linux-system-roles.cockpit`     |
-| [`linux-system-roles.rhc`](https://galaxy.ansible.com/ui/standalone/roles/linux-system-roles/cockpit/)          | `ansible-galaxy role info linux-system-roles.rhc`         |
+| Galaxy Role Name                                                                                                  | View Info Command                                         |
+|---                                                                                                                |---                                                        |
+| [`linux-system-roles.cockpit`](https://galaxy.ansible.com/ui/standalone/roles/linux-system-roles/cockpit/)        | `ansible-galaxy role info linux-system-roles.cockpit`     |
+| [`linux-system-roles.rhc`](https://galaxy.ansible.com/ui/standalone/roles/linux-system-roles/cockpit/)            | `ansible-galaxy role info linux-system-roles.rhc`         |
+| [`linux-system-roles.firewall`](https://galaxy.ansible.com/ui/standalone/roles/linux-system-roles/firewall/)      | `ansible-galaxy role info linux-system-roles.firewall`    |
+
 
 ## Install Ansible Galaxy Roles and Collections
 
@@ -48,14 +50,20 @@ You should get a 'Pong' in return...
 | [rhel-setup-enable-cockpit.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-cockpit.yml)       | Enable Cockpit (`http://<hostname>:9090`) |
 | [rhel-setup-subscribe.yml](/hp-linux-servers/rhel-setup/rhel-setup-subscribe.yml)                 | Subscribe to Red Hat                      |
 | [rhel-setup-update-packages.yml](/hp-linux-servers/rhel-setup/rhel-setup-update-packages.yml)     | Update ALL Packages                       |
+| [rhel-setup-enable-epel.yml](/hp-linux-servers/rhel-setup/rhel-setup-enable-epel.yml)             | Install and Enable EPEL Repo              |
+| [rhel-setup-rdp.yml](/hp-linux-servers/rhel-setup/rhel-setup-rdp.yml)                             | Install xrdp and allow Firewall           |
+
 
 ## Run the Ansible Playbooks
 
-| Playbook              | Command                                                                                                                                                   |
-|---                    |---                                                                                                                                                        |
-| Enable Cockpit        | `ansible-playbook rhel-setup/rhel-setup-enable-cockpit.yml -e "hostlist=all" --ask-become-pass`                                                           |
-| Subscribe             | `ansible-playbook rhel-setup/rhel-setup-subscribe.yml -e "hostlist=all orgid=<enter-org-id> activationkey=<enter-activation-key>" --ask-become-pass`      |
-| Update ALL Packages   | `ansible-playbook rhel-setup/rhel-setup-update-packages.yml -e "hostlist=all" --ask-become-pass`                                                          |
+| Playbook                          | Command                                                                                                                                                   |
+|---                                |---                                                                                                                                                        |
+| Enable Cockpit                    | `ansible-playbook rhel-setup/rhel-setup-enable-cockpit.yml -e "hostlist=all" --ask-become-pass`                                                           |
+| Subscribe                         | `ansible-playbook rhel-setup/rhel-setup-subscribe.yml -e "hostlist=all orgid=<enter-org-id> activationkey=<enter-activation-key>" --ask-become-pass`      |
+| Update ALL Packages               | `ansible-playbook rhel-setup/rhel-setup-update-packages.yml -e "hostlist=all" --ask-become-pass`                                                          |
+| Install and Enable EPEL Repo      | `ansible-playbook rhel-setup/rhel-setup-enable-epel.yml -e "hostlist=all" --ask-become-pass`                                                              |
+| Install xrdp and allow Firewall   | `ansible-playbook rhel-setup/rhel-setup-rdp.yml -e "hostlist=all" --ask-become-pass`                                                                      |
+
 
 ## Ansible AdHoc Commands
 
