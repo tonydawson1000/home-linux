@@ -48,7 +48,8 @@ Additional CLI Tools include:
 | `dominfo <vm-name>`                           | View Basic Info for a VM / Domain                             |
 | `domstate <vm-name>`                          | View the current 'State' of a VM / Domain                     |
 | Storage                                       |                                                               |
-| `domblkinfo <vm-name> --all`                  | View the Block Device(s) associated with a VM / Domain        |
+| `domblklist <vm-name>`                        | View the Block Devices defined                                |
+| `domblkinfo <vm-name> --all`                  | View the Block Device info / stats                            |
 | `domblkstat <vm-name>`                        | View Block Device Stats on a running VM / Domain              |
 | Network                                       |                                                               |
 | `domiflist <vm-name>`                         | View Network Interface list for VM / Domain                   |
@@ -175,5 +176,91 @@ sudo virt-install \
 
 [link](https://raw.githubusercontent.com/ACloudGuru-Resources/KVM-Virtualization-on-Linux/master/7.5%20Using%20virsh%20to%20Manage%20Virtual%20Devices.txt)
 
-Connect to VM Console
+### Connect to VM
+
+With `virsh` Console
 - `sudo virsh console <vm-name>`
+
+With `ssh`
+- `ssh <username>@<ip>`
+
+Get VM IP's (from DHCP)
+- `sudo virsh net-dhcp-leases default`
+
+### Attach a 'CD ROM' Drive
+
+- Ensure there is a drive available to mount to
+    - `sudo virsh domblklist <vm-name>`
+        - e.g. `sudo virsh domblklist vmdeb12-base`
+
+- Attach the ISO
+    - `sudo virsh change-media <vm-name> <drive-sda> <path-and-iso> --insert --live`
+        - e.g. `sudo virsh change-media vmdeb12-base sda /tmp/debian-12.6.0-amd64-DVD-1.iso --insert --live`
+
+- Verify the ISO is attached
+    - `sudo virsh domblklist <vm-name>`
+        - e.g. `sudo virsh domblklist vmdeb12-base`
+
+### SSH into the VM, `Mount` the ISO/drive and view contents
+
+- Ensure the 'Virtual Disk Drive' is available
+    - `ls -la /dev/sr0`
+
+- Ensure the mount point is empty
+    - `ls -la /mnt`
+
+- Ensure there is nothing already mounted
+    - `df -h | grep mnt`
+
+- Mount the 'Drive' to the 'Mount Point'
+    - `sudo mount /dev/sr0 /mnt`
+
+- Validate the Mount succeeded
+    - `df -h | grep mnt`
+
+- View the Contents
+    - `ls -la /mnt`
+
+- Unmount the Drive
+    - `sudo umount /mnt`
+
+- Validate the Unmount succeeded
+    - `ls -la /mnt`
+
+- Logout of the VM
+    - `exit`
+
+- Detach the ISO from the Virtual Media Drive
+    - `sudo virsh change-media <vm-name> <drive-sda> --eject`
+        - e.g. `sudo virsh change-media vmdeb12-base sda --eject`
+
+- Validate the ISO was ejected / detached successfully
+    - `sudo virsh domblklist <vm-name>`
+        - e.g. `sudo virsh domblklist vmdeb12-base`
+
+### Manage VM Resources
+NOTE : VM must be in 'Shut Down' / Off state
+
+This uses the build-in editor
+
+Can change values for Memory (`<memory>` and `<currentMemory>`) and vCPU (`<vcpu>`)
+
+- Edit the config for a VM
+    - `sudo virsh edit <vm-name>`
+        - e.g. `sudo virsh edit vmdeb12-base`
+
+- View / Validate the Info for a VM
+    - `sudo virsh dominfo <vm-name>`
+        - e.g. `sudo virsh dominfo vmdeb12-base`
+
+- View VM Stats
+
+    Login
+    - `sudo virsh console <vm-name>`
+        - e.g. `sudo virsh console vmdeb12-base`
+
+- View a Count of CPU's
+    - `grep -i processor /proc/cpuinfo`
+
+- View RAM / Memory Total
+    - `grep MemTotal /proc/meminfo`
