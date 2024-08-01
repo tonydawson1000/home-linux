@@ -11,15 +11,17 @@
     - Toolkit to manage virtualisation platforms (like QEMU/KVM)
 
 - End User Management tools
-    - Virtual Machine Manager (Nice GUI App)
+    - [Virtual Machine Manager](/virt-manager-notes.md) (Nice GUI App)
         - [`virt-manager`](https://virt-manager.org/) - GUI for managing Guest VMs
         - Create, edit, start and stop guest vms
 
-    - Cockpit/Web Console
-    - `virsh` CLI
+    - [Cockpit/Web Console](/cockpit-notes.md)
+
+    - [`virsh`](/virsh-cli-notes.md) CLI
+    
     - oVirt/RHEV (Red Hat Enterprise Virtualisation)
 
-### Does the CPU support Virtualisation?
+### PreReqs : Does the CPU support Virtualisation?
 
 Are the KVM Modules loaded?
 - `lsmod | grep kvm`
@@ -32,11 +34,6 @@ What 'Type' of CPU / Virtualisation?
 
 How many CPU Cores?
 - `egrep "vmx|svm" /proc/cpuinfo | wc -l`
-
-
-
-
-
 
 # Optional
 
@@ -54,29 +51,16 @@ List the current firewall config
 
 Enable port 3389 for RDP Connections and persist between reboots
 
-NOTE : This is now done via [ansible](/hp-linux-servers/rhel-setup/rhel-setup-rdp.yml)
+NOTE : There is now [an ansible playbook](/hp-linux-servers/rhel-setup/rhel-setup-rdp.yml) to setup xrdp and firewall config
 - `sudo firewall-cmd --zone=public --add-port=3389/tcp --permanent`
 
 Reload to ensure changes are picked up
 - `sudo firewall-cmd --reload`
 
-## virt-manager (Graphical)
+## Networking
 
-What is included in the 'Virtualization Client' Group? 
-- `dnf groupinfo Virtualization\ Client`
-
-** MANUAL CHANGES REQUIRED HERE **
-
-After running the [rhel-setup-enable-virtualisation](/hp-linux-servers/rhel-setup/rhel-setup-enable-virtualisation.yml) playbook - you need to :
-
-1. Edit the `/etc/libvirt/libvirtd.conf` file
-1. Uncomment the line `unix_sock_group = "libvirt"` - This will allow us to add the <`user-name`> to the libvirt group (to allow that user access to the unix socket)
-1. Uncomment the line `unix_sock_rw_perms = "0770"` - This will set the correct socket permissions
-1. Add <`user-name`> to the `libvirt` group by running
-    
-    `usermod -a -G libvirt <user-name>`
-
-1. Confirm Group Membership with - the user should now show in the libvirt group
-
-    `groups <user-name>`
-
+- Display
+    - `ip addr`
+- View Networking Scripts
+    - `ls -la /etc/sysconfig/network-scripts`
+- Can add multiple NIC's attached to different Networks
