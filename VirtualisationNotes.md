@@ -54,6 +54,9 @@ Enable port 3389 for RDP Connections and persist between reboots
 NOTE : There is now [an ansible playbook](/hp-linux-servers/rhel-setup/rhel-setup-rdp.yml) to setup xrdp and firewall config
 - `sudo firewall-cmd --zone=public --add-port=3389/tcp --permanent`
 
+To Add Firewall rule to allow HTTP
+- `sudo firewall-cmd --zone=public --add-service=http --permanent`
+
 Reload to ensure changes are picked up
 - `sudo firewall-cmd --reload`
 

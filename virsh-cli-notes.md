@@ -28,10 +28,13 @@ Additional CLI Tools include:
 |---                                            |---                                                            |
 | Virsh Shell                                   |                                                               |
 | `sudo virsh`                                  | Enter the virsh shell to execute commands directly            |
+| `help`                                        | Displays Help at any time                                     |
 | Virtual Machines                              |                                                               |
 | `list --all`                                  | List all VM's (in 'all' states inc powered off)               |
 | `start <vm-name>`                             | Start a VM                                                    |
 | `shutdown <vm-name>`                          | Shutdown a VM                                                 |
+| `dominfo <vm-name>`                           | View Basic Info for a VM / Domain                             |
+| `domstate <vm-name>`                          | View the current 'State' of a VM / Domain                     |
 | `domid <vn-name>`                             | Get the ID of a Running VM / Domain                           |
 | `domname <vm-id>`                             | Get the Name of a Running VM / Domain                         |
 | `dumpxml <vm-name> OR <vm-id>`                | View the FULL XML config for a VM / Domain                    |
@@ -44,9 +47,6 @@ Additional CLI Tools include:
 | `vcpucount <vm-name>`                         | View CPU Count for a VM / Domain                              |
 | Memory                                        |                                                               |
 | `dommemstat <vm-name>`                        | View Memory Info for a VM / Domain                            |
-| State                                         |                                                               |
-| `dominfo <vm-name>`                           | View Basic Info for a VM / Domain                             |
-| `domstate <vm-name>`                          | View the current 'State' of a VM / Domain                     |
 | Storage                                       |                                                               |
 | `domblklist <vm-name>`                        | View the Block Devices defined                                |
 | `domblkinfo <vm-name> --all`                  | View the Block Device info / stats                            |
